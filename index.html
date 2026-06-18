@@ -249,13 +249,35 @@
         <p>&copy; 2024 DevStudio Software Solutions. All rights reserved.</p>
     </footer>
 <!-- Leads AI Widget -->
-<script
-  src="https://outhouse-cognitive-magical.ngrok-free.dev/widget/leadsai.js"
-  data-company="winssoft-innovations-4698"
-  data-key="aHR0cHM6Ly9vdXRob3VzZS1jb2duaXRpdmUtbWFnaWNhbC5uZ3Jvay1mcmVlLmRldg=="
-  id="leadsai-embed-script"
-  defer
-></script>
+<script>
+  // 1. Define your Ngrok URL and attributes
+  const widgetUrl = "https://outhouse-cognitive-magical.ngrok-free.dev/widget/leadsai.js";
+  
+  // 2. Fetch the script with the bypass header
+  fetch(widgetUrl, {
+    headers: {
+      "ngrok-skip-browser-warning": "any-value-works" // This tells ngrok to skip the HTML warning page
+    }
+  })
+  .then(response => {
+    if (!response.ok) throw new Error("Network response was not ok");
+    return response.text();
+  })
+  .then(scriptContent => {
+    // 3. Create a new script element
+    const scriptElement = document.createElement("script");
+    scriptElement.id = "leadsai-embed-script";
+    scriptElement.setAttribute("data-company", "winssoft-innovations-4698");
+    scriptElement.setAttribute("data-key", "aHR0cHM6Ly9vdXRob3VzZS1jb2duaXRpdmUtbWFnaWNhbC5uZ3Jvay1mcmVlLmRldg==");
+    
+    // 4. Inject the fetched code into the tag and append it to the body
+    scriptElement.text = scriptContent;
+    document.body.appendChild(scriptElement);
+  })
+  .catch(error => {
+    console.error("Failed to load Leads AI Widget:", error);
+  });
+</script>
 
 </body>
 </html>
